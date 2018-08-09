@@ -1,0 +1,146 @@
+<SCRIPT LANGUAGE=VBScript RUNAT=Server>
+Sub Application_OnStart
+	'==FrontPage Generated - startspan==
+	Dim FrontPage_UrlVars(2)
+	'--Project Data Connection
+		Application("newSQL_ConnectionString") = "DRIVER={SQL Server};SERVER=a1fbusql01;DATABASE=isismeetings;UID=sql_meeting_user;PWD=m3@t1n$8"
+		Application("newSQL_ConnectionTimeout") = 15
+		Application("newSQL_CommandTimeout") = 30
+		Application("newSQL_CursorLocation") = 3
+		Application("newSQL_RuntimeUserName") = "sql_meeting_user"
+		Application("newSQL_RuntimePassword") = "m3@t1n$8"
+	'--Project Data Connection
+		Application("IsisMtgsDBconn_ConnectionString") = "File Name=URL=fpdb/IsisMtgsDBconn.udl"
+		FrontPage_UrlVars(1) = "IsisMtgsDBconn_ConnectionString"
+		Application("IsisMtgsDBconn_ConnectionTimeout") = 15
+		Application("IsisMtgsDBconn_CommandTimeout") = 30
+		Application("IsisMtgsDBconn_CursorLocation") = 3
+		Application("IsisMtgsDBconn_RuntimeUserName") = ""
+		Application("IsisMtgsDBconn_RuntimePassword") = ""
+	'--
+	Application("FrontPage_UrlVars") = FrontPage_UrlVars
+	'==FrontPage Generated - endspan==
+End Sub
+Sub Session_OnStart
+	FrontPage_StartSession '==FrontPage Generated==
+	FrontPage_ConvertFromODBC '==FrontPage Generated==
+End Sub
+Sub FrontPage_StartSession
+	On Error Resume Next
+	if Len(Application("FrontPage_VRoot")) > 0 then Exit Sub
+	
+	sFile = "global.asa"
+	sRootPath = Request.ServerVariables("APPL_PHYSICAL_PATH")
+	if Left(sRootPath,1) = "/" then sSep = "/" else sSep = "\"
+	if Right(sRootPath,1) <> sSep then sRootPath = sRootPath & sSep
+	sRootPath = sRootPath & sFile
+	
+	' discover the VRoot for the current page;
+	' walk back up VPath until we match VRoot
+	Vroot = Request.ServerVariables("PATH_INFO")
+	iCount = 0
+	do while Len(Vroot) > 1
+		idx = InStrRev(Vroot, "/")
+		if idx > 0 then
+			Vroot = Left(Vroot,idx)
+		else
+			' error; assume root web
+			Vroot = "/"
+		end if
+		if UCase(Server.MapPath(Vroot & sFile)) = UCase(sRootPath) then exit do
+		if Right(Vroot,1) = "/" then Vroot = Left(Vroot,Len(Vroot)-1)
+		iCount = iCount + 1
+		if iCount > 100 then
+			' error; assume root web
+			Vroot = "/"
+			exit do
+		end if
+	loop
+	' map all URL= attributes in _ConnectionString variables
+	Application.Lock
+	if Len(Application("FrontPage_VRoot")) = 0 then
+		Application("FrontPage_VRoot") = Vroot
+		UrlVarArray = Application("FrontPage_UrlVars")
+		for i = 0 to UBound(UrlVarArray)
+			if Len(UrlVarArray(i)) > 0 then FrontPage_MapUrl(UrlVarArray(i))
+		next
+	end if
+	Application.Unlock
+End Sub
+Sub FrontPage_MapUrl(AppVarName)
+	' convert URL attribute in conn string to absolute file location
+	strVal = Application(AppVarName)
+	strKey = "URL="
+	idxStart = InStr(strVal, strKey)
+	If idxStart = 0 Then Exit Sub
+	strBefore = Left(strVal, idxStart - 1)
+	idxStart = idxStart + Len(strKey)
+	idxEnd = InStr(idxStart, strVal, ";")
+	If idxEnd = 0 Then
+		strAfter = ""
+		strURL = Mid(strVal, idxStart)
+	Else
+		strAfter = ";" & Mid(strVal, idxEnd + 1)
+		strURL = Mid(strVal, idxStart, idxEnd - idxStart)
+	End If
+	strOut = strBefore & Server.MapPath(Application("FrontPage_VRoot") & strURL) & strAfter
+	Application(AppVarName) = strOut
+End Sub
+Sub FrontPage_ConvertFromODBC
+	On Error Resume Next
+	if Len(Application("ASP_OS")) > 0 then exit sub
+	str = "_ConnectionString"
+	slen = Len(str)
+	set oKnown = Server.CreateObject("Scripting.Dictionary")
+	oKnown.Add "DRIVER",""
+	oKnown.Add "DBQ",""
+	oKnown.Add "SERVER",""
+	oKnown.Add "DATABASE",""
+	oKnown.Add "UID",""
+	oKnown.Add "PWD",""
+	Application.Lock
+	For each item in Application.Contents
+		if UCase(Right(item,slen)) = UCase(str) then
+			sName = Left(item,Len(item)-slen)
+			sConn = Application(item)
+			if InStr(LCase(sConn),"provider=") < 1 and Len(Application(sName & "_ConnectionTimeout"))>0 then
+				sArr = Split(sConn,";")
+				set oDict = Server.CreateObject("Scripting.Dictionary")
+				bUnknown = False
+				for i = 0 to UBound(sArr)
+					s = sArr(i)
+					idx = InStr(s,"=")
+					sKey = UCase(Trim(Left(s,idx-1)))
+					sVal = Trim(Mid(s,idx+1))
+					oDict.Add sKey, sVal
+					if Not oKnown.Exists(sKey) then bUnknown = True
+				next
+				if bUnknown = False and oDict.Exists("DRIVER") then
+					sDrv = oDict.Item("DRIVER")
+					sNew = ""
+					if InStr(sDrv,"Microsoft Access") > 0 and oDict.Exists("DBQ") and not (oDict.Exists("UID") or oDict.Exists("PWD")) then
+						sNew = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & oDict.Item("DBQ")
+					elseif InStr(sDrv,"SQL Server") > 0 and oDict.Exists("SERVER") and oDict.Exists("DATABASE") then
+						sNew = "Provider=SQLOLEDB;Data Source=" & oDict("SERVER") & ";Initial Catalog=" & oDict("DATABASE")
+						if oDict.Exists("UID") then sNew = sNew & ";User ID=" & oDict("UID")
+						if oDict.Exists("PWD") then sNew = sNew & ";Password=" & oDict("PWD")
+					end if
+					if sNew <> "" then
+						Application(item) = sNew
+					end if
+				end if
+				set oDict = Nothing
+			end if
+		end if
+	Next
+	Application.Unlock
+	Set oKnown = Nothing
+End Sub
+</SCRIPT>
+<head><title>Web Site Settings for Active Server Pages</title><html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:connectionstatus msdt:dt="string">newSQL=1 IsisMtgsDBconn=0</mso:connectionstatus>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>

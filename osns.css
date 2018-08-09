@@ -1,0 +1,84 @@
+body { 
+	font-size: 0.9em; 
+	font-family: arial, Helvetica, sans-serif;
+	color: black;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;}
+
+
+.main {
+	width: 788px;
+	text-align: left; 
+	margin: 0px auto;}
+	
+.title {
+	font-style: italic;
+	color: #3366CC;
+	text-align: left;}
+
+p, td {  
+	font-size: 0.95em; 
+	line-height: 1.5em; 
+	font-family: arial, helvetica, sans-serif;
+	text-align: left;
+	vertical-align: top;}
+
+li {  
+	font-size: 0.95em; 
+	font-family: arial, helvetica, sans-serif;
+	text-align: left;
+	vertical-align: top;}
+	
+hr { color: #000080;}
+
+.maintable { 
+	font-family: arial, helvetica, sans-serif; 
+	border: solid 1px #000066; }
+
+.titlebox {
+	background-color: #000066;}
+	
+.table90 {
+	width: 90%;
+	font-size: 0.95em; }
+	
+.table50 {
+	width: 50%;}
+
+.navtable {
+	border-collapse: separate;
+	border: hidden;
+	text-align: center;
+	}
+	
+h1, h2, h3, h4 {
+	color:#000080;}
+	
+
+.left {
+	text-align: left;
+	vertical-align: middle;}
+	
+.right {
+	text-align: right;
+	vertical-align: middle;}
+	
+.center {
+	text-align: center;}
+
+.middle {
+	vertical-align: middle;}
+
+
+a:link { 
+	color: blue; 
+	text-decoration: none }
+a:visited { 
+	color: purple; 
+	text-decoration: none }
+a:active { 
+	color: blue; 
+	text-decoration: none }
+a:hover { 
+	text-decoration: underline }

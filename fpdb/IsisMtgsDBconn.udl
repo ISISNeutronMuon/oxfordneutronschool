@@ -1,0 +1,4 @@
+-------------------- Start of UDL file --------------------
+[oledb] ; Everything after this line is an OLE DB initstring
+Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=isismeetings;Data Source=A1FBUSQL01
+-------------------- End of UDL file --------------------
