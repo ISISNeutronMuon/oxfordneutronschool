@@ -1,20 +1,20 @@
 vti_encoding:SR|utf8-nl
 vti_author:SR|ISISCNC\\mjb
-vti_modifiedby:SR|ISISCNC\\mjb
-vti_timelastmodified:TR|18 May 2009 16:15:42 -0000
+vti_modifiedby:SR|CLRC\\sl27
+vti_timelastmodified:TR|09 Aug 2018 14:46:58 -0000
 vti_timecreated:TR|25 Apr 2007 12:49:05 -0000
-vti_extenderversion:SR|5.0.2.6790
+vti_extenderversion:SR|12.0.0.6500
 vti_lineageid:SR|{D08598C1-E60A-4263-A8EB-650BD42AC68D}
 vti_backlinkinfo:VX|
 vti_excludefromtoc:SW|y
 vti_lastmodifiedbyproduct:SW|fp40
 vti_title:SR|Web Site Settings for Active Server Pages
 vti_nexttolasttimemodified:TR|18 May 2009 16:15:42 -0000
-vti_cacheddtm:TX|18 May 2009 16:15:42 -0000
+vti_cacheddtm:TX|09 Aug 2018 14:46:58 -0000
 vti_filesize:IR|5458
 vti_cachedtitle:SR|Web Site Settings for Active Server Pages
-vti_cachedlinkinfo:VX|D|X-DATACONN://ndapelham/conferences/oxfordneutronschool/newSQL/DRIVER={SQL\\ Server};SERVER=a1fbusql01;DATABASE=isismeetings;UID=sql_meeting_user;PWD=m3@t1n$8 D|X-DATACONN://ndapelham/conferences/oxfordneutronschool/IsisMtgsDBconn/File\\ Name=URL=fpdb/IsisMtgsDBconn.udl H|fpdb/IsisMtgsDBconn.udl
-vti_cachedsvcrellinks:VX|NDUS|X-DATACONN://ndapelham/conferences/oxfordneutronschool/newSQL/DRIVER={SQL\\ Server};SERVER=a1fbusql01;DATABASE=isismeetings;UID=sql_meeting_user;PWD=m3@t1n$8 NDUS|X-DATACONN://ndapelham/conferences/oxfordneutronschool/IsisMtgsDBconn/File\\ Name=URL=fpdb/IsisMtgsDBconn.udl FHUS|fpdb/IsisMtgsDBconn.udl
+vti_cachedlinkinfo:VX|D|X-DATACONN:///C:/Users/sl27/Documents/GitHub/oxfordneutronschool/newSQL/DRIVER={SQL\\ Server};SERVER=a1fbusql01;DATABASE=isismeetings;UID=sql_meeting_user;PWD=m3@t1n$8 D|X-DATACONN:///C:/Users/sl27/Documents/GitHub/oxfordneutronschool/IsisMtgsDBconn/File\\ Name=URL=fpdb/IsisMtgsDBconn.udl H|fpdb/IsisMtgsDBconn.udl
+vti_cachedsvcrellinks:VX|NDUS|X-DATACONN:///C:/Users/sl27/Documents/GitHub/oxfordneutronschool/newSQL/DRIVER={SQL\\ Server};SERVER=a1fbusql01;DATABASE=isismeetings;UID=sql_meeting_user;PWD=m3@t1n$8 NDUS|X-DATACONN:///C:/Users/sl27/Documents/GitHub/oxfordneutronschool/IsisMtgsDBconn/File\\ Name=URL=fpdb/IsisMtgsDBconn.udl FHUS|fpdb/IsisMtgsDBconn.udl
 vti_cachedneedsrewrite:BR|false
 vti_cachedhasbots:BR|false
 vti_cachedhastheme:BR|false
@@ -22,8 +22,9 @@ vti_cachedhasborder:BR|false
 vti_cacheddataconns:VR|newSQL IsisMtgsDBconn
 vti_cacheddataconnattrs_newSQL:VR|_type=fp40 connectionstring=DRIVER={SQL\\ Server};SERVER=a1fbusql01;DATABASE=isismeetings;UID=sql_meeting_user;PWD=m3@t1n$8 connectiontimeout=15 commandtimeout=30 cursorlocation=3 runtimeusername=sql_meeting_user runtimepassword=m3@t1n$8
 vti_cacheddataconnattrs_IsisMtgsDBconn:VR|_type=fp40 connectionstring=File\\ Name=URL=fpdb/IsisMtgsDBconn.udl connectiontimeout=15 commandtimeout=30 cursorlocation=3 runtimeusername= runtimepassword=
-vti_error0:SX|The data connection 'IsisMtgsDBconn' specifies a custom definition file 'fpdb/IsisMtgsDBconn.udl' that is not in the web folder '_private'.
-vti_error:IX|1
+vti_error0:SX|The data connection 'newSQL' uses a password. The file 'global.asa' that contains this password may be viewable by a Web browser, because the current Web does not support Active Server Pages.
+vti_error1:SX|The data connection 'IsisMtgsDBconn' specifies a custom definition file 'fpdb/IsisMtgsDBconn.udl' that is not in the Web folder '_private'.
+vti_error:IX|2
 vti_charset:SR|windows-1252
 connectionstatus:SW|newSQL=1 IsisMtgsDBconn=0
 vti_cachedcustomprops:VX|connectionstatus
